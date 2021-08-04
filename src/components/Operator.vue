@@ -93,10 +93,12 @@ export default {
         layer2,
         amount,
       );
+      this.sended = true;
       await tx.wait();
 
       this.o = await operator(this.operator, this.$store.state.user);
       await this.$store.dispatch('get');
+      this.sended = false;
       alert('success');
     },
     async restake () {
@@ -105,10 +107,12 @@ export default {
       const tx = await depositManager.redeposit(
         layer2,
       );
+      this.sended = true;
       await tx.wait();
 
       this.o = await operator(this.operator, this.$store.state.user);
       await this.$store.dispatch('get');
+      this.sended = false;
       alert('success');
     },
     async process () {
@@ -118,10 +122,12 @@ export default {
         layer2,
         true,
       );
+      this.sended = true;
       await tx.wait();
 
       this.o = await operator(this.operator, this.$store.state.user);
       await this.$store.dispatch('get');
+      this.sended = false;
       alert('success');
     },
   },
