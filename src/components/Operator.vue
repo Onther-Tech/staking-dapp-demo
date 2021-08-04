@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <div v-if="sended" class="centered">
+      <vue-loading type="bars" color="#d9544e" :size="{ width: '50px', height: '50px' }"></vue-loading>
+      <h3>Waiting for Confirmation</h3>
+    </div>
     <div style="text-align: left; max-width: 500px;">
       <div>operator: {{o.owner}}</div>
       <div>operatorContract: {{ operator.layer2 }}</div>
@@ -33,11 +37,16 @@
 import { TON, DepositManager } from '../helper/helper'
 import { operator } from '../helper/staking'
 import { ethers } from 'ethers'
+import { VueLoading } from 'vue-loading-template'
 
 export default {
+  components: {
+    VueLoading,
+  },
   data() {
     return {
       o: {},
+      sended: false,
     }
   },
   props: {
@@ -67,10 +76,12 @@ export default {
         amount,
         data
       );
+      this.sended = true;
       await tx.wait();
 
       this.o = await operator(this.operator, this.$store.state.user);
       await this.$store.dispatch('get');
+      this.sended = false;
       alert('success!');
     },
     async unstake () {
@@ -118,13 +129,19 @@ export default {
 </script>
 
 <style scoped>
+button {
+  margin: 10px;
+}
+
 .container {
   max-width: 960px;
   display: flex;
   margin-bottom: 60px;
 }
 
-button {
-  margin: 10px;
+.centered {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 </style>
