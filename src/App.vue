@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    Please use Rinkeby network!
+    <Entrance />
+    <Operators />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Entrance from './components/Entrance.vue';
+import Operators from './components/Operators.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Entrance,
+    Operators,
   }
 }
 </script>
